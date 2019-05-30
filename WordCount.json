@@ -1,0 +1,74 @@
+{
+  "Tokyo": {
+    "positive": 127,
+    "negative": 131,
+    "neutral": 1654,
+    "positive_pct": 6.64,
+    "negative_pct": 6.85,
+    "neutral_pct": 86.51,
+    "sentiment": -1.55
+  },
+  "Singapore": {
+    "positive": 285,
+    "negative": 272,
+    "neutral": 2003,
+    "positive_pct": 11.13,
+    "negative_pct": 10.62,
+    "neutral_pct": 78.24,
+    "sentiment": 2.33
+  },
+  "Beijing": {
+    "positive": 110,
+    "negative": 125,
+    "neutral": 1504,
+    "positive_pct": 6.33,
+    "negative_pct": 7.19,
+    "neutral_pct": 86.49,
+    "sentiment": -6.38
+  },
+  "Brunei": {
+    "positive": 123,
+    "negative": 117,
+    "neutral": 1365,
+    "positive_pct": 7.66,
+    "negative_pct": 7.29,
+    "neutral_pct": 85.05,
+    "sentiment": 2.5
+  },
+  "Melbourne": {
+    "positive": 102,
+    "negative": 74,
+    "neutral": 936,
+    "positive_pct": 9.17,
+    "negative_pct": 6.65,
+    "neutral_pct": 84.17,
+    "sentiment": 15.91
+  },
+  "Hanoi": {
+    "positive": 131,
+    "negative": 97,
+    "neutral": 1328,
+    "positive_pct": 8.42,
+    "negative_pct": 6.23,
+    "neutral_pct": 85.35,
+    "sentiment": 14.91
+  },
+  "Taipei": {
+    "positive": 223,
+    "negative": 144,
+    "neutral": 1485,
+    "positive_pct": 12.04,
+    "negative_pct": 7.78,
+    "neutral_pct": 80.18,
+    "sentiment": 21.53
+  },
+  "Jakarta": {
+    "positive": 175,
+    "negative": 223,
+    "neutral": 1854,
+    "positive_pct": 7.77,
+    "negative_pct": 9.9,
+    "neutral_pct": 82.33,
+    "sentiment": -12.06
+  }
+}

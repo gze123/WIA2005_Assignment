@@ -1,0 +1,16 @@
+Kuala Lumpur,Beijing
+Kuala Lumpur,Taipei
+Kuala Lumpur,Singapore
+Kuala Lumpur,Brunei
+Kuala Lumpur,Jakarta
+Beijing,Tokyo
+Taipei,Beijing
+Taipei,Tokyo
+Taipei,Singapore
+Singapore,Melbourne
+Singapore,Brunei
+Melbourne,Taipei
+Brunei,Jakarta
+Brunei,Hanoi
+Brunei,Melbourne
+Jakarta,Hanoi

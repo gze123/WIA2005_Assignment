@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="poly.css">
+    <title>Simple Polylines</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html,
+      body {
+        height: 500px;
+        width: auto;
+        margin: 36px;
+        padding: 0px;
+        float: center;
+        background-color: azure
+      }
+      #map1 {
+        height: 600px;
+        width: 600px;
+        margin: 0px;
+        padding: 0px;
+        float:center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <br>
+    <button class="btn btn-primary"onclick="show()">Show Map</button>
+    <div style="margin: auto ;height:600px;width:600px;" id="map"></div>
+
+    <form>
+      <fieldset disabled style="border: 0">
+        <div class="form-group">
+            <br>
+          <label for="disabledTextInput" id="textfrom">Flight From</label>
+          <input
+            type="text"
+            id="disabledTextInput"
+            class="form-control"
+            placeholder="Kuala Lumpur"
+          />
+        </div>
+      </fieldset>
+      <fieldset style="border: 0">
+        <div class="form-group">
+          <label for=""id="textfrom">Flight To</label>
+          <br>
+          <select  id="destination">
+            <option value="1">Beijing</option>
+            <option value="2">Taipei</option>
+            <option value="3">Singapore</option>
+            <option value="4">Brunei</option>
+            <option value="5">Jakarta</option>
+            <option value="6">Tokyo</option>
+            <option value="7">Melbourne</option>
+            <option value="8">Hanoi</option>
+          </select>
+          <br><br>
+          <button
+            type="button"
+            value="Submit"
+            id="submit"
+            onclick="selectFunction()"
+            
+            class=""
+          >
+            Submit
+          </butto>
+          <button type="button"
+          value="Submit"
+          id="submit"
+          onclick="selectFunction2()">Show shortest path</button>
+        </div>
+      </fieldset>
+    </form>
+    <div style="margin: auto" id="map1"></div>
+    
+    <div id="detailpic"></div>
+
+    <div style="width: 758px;height:758px;margin: auto" id="map2"></div>
+
+
+
+    <script>
+      // This example creates a 2-pixel-wide red polyline showing the path of
+      // the first trans-Pacific flight between Oakland, CA, and Brisbane,
+      // Australia which was made by Charles Kingsford Smith.
+      function selectFunction2() {
+        var destination = document.getElementById("destination").value;
+        var map1 = new google.maps.Map(document.getElementById("map2"), {
+          zoom: 3,
+          center: { lat: 3.139003, lng: 101.686855 },
+          mapTypeId: "terrain"
+        });
+
+        var flightPlanCoordinatesKL_Beijing = [
+          { lat: 3.139003, lng: 101.686855 },
+          { lat: 39.90419989999999, lng: 116.4073963 }
+        ];
+        var flightPath1 = new google.maps.Polyline({
+          path: flightPlanCoordinatesKL_Beijing,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesKL_Taipei = [
+          { lat: 3.139003, lng: 101.686855 },
+          { lat: 25.0329694, lng: 121.5654177 }
+        ];
+        var flightPath2 = new google.maps.Polyline({
+          path: flightPlanCoordinatesKL_Taipei,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesKL_Singapore = [
+          { lat: 3.139003, lng: 101.686855 },
+          { lat: 1.352083, lng: 103.819836 }
+        ];
+        var flightPath3 = new google.maps.Polyline({
+          path: flightPlanCoordinatesKL_Singapore,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesKL_Brunei = [
+          { lat: 3.139003, lng: 101.686855 },
+          { lat: 4.535277, lng: 114.727669 }
+        ];
+        var flightPath4 = new google.maps.Polyline({
+          path: flightPlanCoordinatesKL_Brunei,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesKL_Jakarta = [
+          { lat: 3.139003, lng: 101.686855 },
+          { lat: -6.2087634, lng: 106.845599 }
+        ];
+        var flightPath5 = new google.maps.Polyline({
+          path: flightPlanCoordinatesKL_Jakarta,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesBeijing_Tokyo = [
+          { lat: 39.90419989999999, lng: 116.4073963 },
+          { lat: 35.6761919, lng: 139.6503106 }
+        ];
+        var flightPath6 = new google.maps.Polyline({
+          path: flightPlanCoordinatesBeijing_Tokyo,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesTaipei_Beijing = [
+          { lat: 25.0329694, lng: 121.5654177 },
+          { lat: 39.90419989999999, lng: 116.4073963 }
+        ];
+        var flightPath7 = new google.maps.Polyline({
+          path: flightPlanCoordinatesTaipei_Beijing,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesTaipei_Tokyo = [
+          { lat: 25.0329694, lng: 121.5654177 },
+          { lat: 35.6761919, lng: 139.6503106 }
+        ];
+        var flightPath8 = new google.maps.Polyline({
+          path: flightPlanCoordinatesTaipei_Tokyo,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesTaipei_Singapore = [
+          { lat: 25.0329694, lng: 121.5654177 },
+          { lat: 1.352083, lng: 103.819836 }
+        ];
+        var flightPath9 = new google.maps.Polyline({
+          path: flightPlanCoordinatesTaipei_Singapore,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesSingapore_Melbourne = [
+          { lat: 1.352083, lng: 103.819836 },
+          { lat: -37.8136276, lng: 144.9630576 }
+        ];
+        var flightPath10 = new google.maps.Polyline({
+          path: flightPlanCoordinatesSingapore_Melbourne,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesSingapore_Brunei = [
+          { lat: 1.352083, lng: 103.819836 },
+          { lat: 4.535277, lng: 114.727669 }
+        ];
+        var flightPath11 = new google.maps.Polyline({
+          path: flightPlanCoordinatesSingapore_Brunei,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesMelbourne_Taipei = [
+          { lat: -37.8136276, lng: 144.9630576 },
+          { lat: 25.0329694, lng: 121.5654177 }
+        ];
+        var flightPath12 = new google.maps.Polyline({
+          path: flightPlanCoordinatesMelbourne_Taipei,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesBrunei_Jakarta = [
+          { lat: 4.535277, lng: 114.727669 },
+          { lat: -6.2087634, lng: 106.845599 }
+        ];
+        var flightPath13 = new google.maps.Polyline({
+          path: flightPlanCoordinatesBrunei_Jakarta,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesBrunei_Hanoi = [
+          { lat: 4.535277, lng: 114.727669 },
+          { lat: 21.0277644, lng: 105.8341598 }
+        ];
+        var flightPath14 = new google.maps.Polyline({
+          path: flightPlanCoordinatesBrunei_Hanoi,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesBrunei_Melbourne = [
+          { lat: 4.535277, lng: 114.727669 },
+          { lat: -37.8136276, lng: 144.9630576 }
+        ];
+        var flightPath15 = new google.maps.Polyline({
+          path: flightPlanCoordinatesBrunei_Melbourne,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesJakarta_Hanoi = [
+          { lat: -6.2087634, lng: 106.845599 },
+          { lat: 21.0277644, lng: 105.8341598 }
+        ];
+        var flightPath16 = new google.maps.Polyline({
+          path: flightPlanCoordinatesJakarta_Hanoi,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+        
+
+        if (destination == 1) {
+          //beijing
+          flightPath1.setMap(map1); //kl-beijing
+          flightPath2.setMap(map1); //taipei
+          flightPath7.setMap(map1); //taipei-beijing
+          console.log("beijing");
+
+          
+        }
+
+        if (destination == 2) {
+          //taipei
+          flightPath2.setMap(map1); //taipei
+          flightPath3.setMap(map1); //singapore
+          flightPath10.setMap(map1); //sing - melbourne
+          flightPath12.setMap(map1); //melbourne-taipei
+        }
+
+        if (destination == 3) {
+          //singapore
+          flightPath3.setMap(map1); //singapore
+          flightPath2.setMap(map1); //taipei
+          flightPath9.setMap(map1); //taipei-singapore
+        }
+
+        if (destination == 4) {
+          //brunei
+          flightPath4.setMap(map1); //brunei
+          flightPath3.setMap(map1); //singapore
+          flightPath11.setMap(map1); //singapore-brunei
+        }
+
+        if (destination == 5) {
+          //jakarta
+          flightPath5.setMap(map1); //jakarta
+          flightPath4.setMap(map1); //brunei
+          flightPath13.setMap(map1); //brunei-jakarta
+        }
+
+        if (destination == 6) {
+          //tokyo
+          
+          
+          flightPath2.setMap(map1); //taipei
+          flightPath8.setMap(map1); //taipei-tokyo
+          
+        }
+
+        if (destination == 7) {
+          //melbourne
+          flightPath3.setMap(map1); //singapore
+          flightPath10.setMap(map1); //singapore-melbourne
+          flightPath4.setMap(map1); //
+          flightPath15.setMap(map1); //brunei-melbourne
+          flightPath2.setMap(map1); //taipei
+          flightPath9.setMap(map1); //taipei-singapore
+        }
+
+        if (destination == 8) {
+          //hanoi
+          flightPath4.setMap(map1); //brunei
+          flightPath14.setMap(map1); //brunei-hanoi
+          flightPath5.setMap(map1); //jakarta
+          flightPath16.setMap(map1); //jakarta-hanoi
+          flightPath3.setMap(map1); //singapore
+          flightPath11.setMap(map1); //singapore-brunei
+          flightPath13.setMap(map1); //brunei-jakarta
+          flightPath2.setMap(map1); //taipei
+          flightPath9.setMap(map1); //taipei-singapore
+        }
+      }
+
+      function selectFunction() {
+        var destination = document.getElementById("destination").value;
+        var map1 = new google.maps.Map(document.getElementById("map1"), {
+          zoom: 3,
+          center: { lat: 3.139003, lng: 101.686855 },
+          mapTypeId: "terrain"
+        });
+
+        var flightPlanCoordinatesKL_Beijing = [
+          { lat: 3.139003, lng: 101.686855 },
+          { lat: 39.90419989999999, lng: 116.4073963 }
+        ];
+        var flightPath1 = new google.maps.Polyline({
+          path: flightPlanCoordinatesKL_Beijing,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesKL_Taipei = [
+          { lat: 3.139003, lng: 101.686855 },
+          { lat: 25.0329694, lng: 121.5654177 }
+        ];
+        var flightPath2 = new google.maps.Polyline({
+          path: flightPlanCoordinatesKL_Taipei,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesKL_Singapore = [
+          { lat: 3.139003, lng: 101.686855 },
+          { lat: 1.352083, lng: 103.819836 }
+        ];
+        var flightPath3 = new google.maps.Polyline({
+          path: flightPlanCoordinatesKL_Singapore,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesKL_Brunei = [
+          { lat: 3.139003, lng: 101.686855 },
+          { lat: 4.535277, lng: 114.727669 }
+        ];
+        var flightPath4 = new google.maps.Polyline({
+          path: flightPlanCoordinatesKL_Brunei,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesKL_Jakarta = [
+          { lat: 3.139003, lng: 101.686855 },
+          { lat: -6.2087634, lng: 106.845599 }
+        ];
+        var flightPath5 = new google.maps.Polyline({
+          path: flightPlanCoordinatesKL_Jakarta,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesBeijing_Tokyo = [
+          { lat: 39.90419989999999, lng: 116.4073963 },
+          { lat: 35.6761919, lng: 139.6503106 }
+        ];
+        var flightPath6 = new google.maps.Polyline({
+          path: flightPlanCoordinatesBeijing_Tokyo,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesTaipei_Beijing = [
+          { lat: 25.0329694, lng: 121.5654177 },
+          { lat: 39.90419989999999, lng: 116.4073963 }
+        ];
+        var flightPath7 = new google.maps.Polyline({
+          path: flightPlanCoordinatesTaipei_Beijing,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesTaipei_Tokyo = [
+          { lat: 25.0329694, lng: 121.5654177 },
+          { lat: 35.6761919, lng: 139.6503106 }
+        ];
+        var flightPath8 = new google.maps.Polyline({
+          path: flightPlanCoordinatesTaipei_Tokyo,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesTaipei_Singapore = [
+          { lat: 25.0329694, lng: 121.5654177 },
+          { lat: 1.352083, lng: 103.819836 }
+        ];
+        var flightPath9 = new google.maps.Polyline({
+          path: flightPlanCoordinatesTaipei_Singapore,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesSingapore_Melbourne = [
+          { lat: 1.352083, lng: 103.819836 },
+          { lat: -37.8136276, lng: 144.9630576 }
+        ];
+        var flightPath10 = new google.maps.Polyline({
+          path: flightPlanCoordinatesSingapore_Melbourne,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesSingapore_Brunei = [
+          { lat: 1.352083, lng: 103.819836 },
+          { lat: 4.535277, lng: 114.727669 }
+        ];
+        var flightPath11 = new google.maps.Polyline({
+          path: flightPlanCoordinatesSingapore_Brunei,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesMelbourne_Taipei = [
+          { lat: -37.8136276, lng: 144.9630576 },
+          { lat: 25.0329694, lng: 121.5654177 }
+        ];
+        var flightPath12 = new google.maps.Polyline({
+          path: flightPlanCoordinatesMelbourne_Taipei,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesBrunei_Jakarta = [
+          { lat: 4.535277, lng: 114.727669 },
+          { lat: -6.2087634, lng: 106.845599 }
+        ];
+        var flightPath13 = new google.maps.Polyline({
+          path: flightPlanCoordinatesBrunei_Jakarta,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesBrunei_Hanoi = [
+          { lat: 4.535277, lng: 114.727669 },
+          { lat: 21.0277644, lng: 105.8341598 }
+        ];
+        var flightPath14 = new google.maps.Polyline({
+          path: flightPlanCoordinatesBrunei_Hanoi,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesBrunei_Melbourne = [
+          { lat: 4.535277, lng: 114.727669 },
+          { lat: -37.8136276, lng: 144.9630576 }
+        ];
+        var flightPath15 = new google.maps.Polyline({
+          path: flightPlanCoordinatesBrunei_Melbourne,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesJakarta_Hanoi = [
+          { lat: -6.2087634, lng: 106.845599 },
+          { lat: 21.0277644, lng: 105.8341598 }
+        ];
+        var flightPath16 = new google.maps.Polyline({
+          path: flightPlanCoordinatesJakarta_Hanoi,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+        
+
+        if (destination == 1) {
+          //beijing
+          flightPath1.setMap(map1); //kl-beijing
+          flightPath2.setMap(map1); //taipei
+          flightPath7.setMap(map1); //taipei-beijing
+          console.log("beijing");
+
+          
+        }
+
+        if (destination == 2) {
+          //taipei
+          flightPath2.setMap(map1); //taipei
+          flightPath3.setMap(map1); //singapore
+          flightPath10.setMap(map1); //sing - melbourne
+          flightPath12.setMap(map1); //melbourne-taipei
+        }
+
+        if (destination == 3) {
+          //singapore
+          flightPath3.setMap(map1); //singapore
+          flightPath2.setMap(map1); //taipei
+          flightPath9.setMap(map1); //taipei-singapore
+        }
+
+        if (destination == 4) {
+          //brunei
+          flightPath4.setMap(map1); //brunei
+          flightPath3.setMap(map1); //singapore
+          flightPath11.setMap(map1); //singapore-brunei
+        }
+
+        if (destination == 5) {
+          //jakarta
+          flightPath5.setMap(map1); //jakarta
+          flightPath4.setMap(map1); //brunei
+          flightPath13.setMap(map1); //brunei-jakarta
+        }
+
+        if (destination == 6) {
+          //tokyo
+          flightPath1.setMap(map1); //kl-beijing
+          flightPath6.setMap(map1); //beijing-tokyo
+          flightPath2.setMap(map1); //taipei
+          flightPath8.setMap(map1); //taipei-tokyo
+          flightPath7.setMap(map1); //taipei-beijing
+          flightPath3.setMap(map1); //singapore
+          flightPath10.setMap(map1); //singapore-melbourne
+          flightPath12.setMap(map1); //melbourne-taipei
+          flightPath4.setMap(map1); //brunei
+          flightPath15.setMap(map1); //brunei-melbourne
+          flightPath12.setMap(map1); //melbourne-taipei
+        }
+
+        if (destination == 7) {
+          //melbourne
+          flightPath3.setMap(map1); //singapore
+          flightPath10.setMap(map1); //singapore-melbourne
+          flightPath4.setMap(map1); //
+          flightPath15.setMap(map1); //brunei-melbourne
+          flightPath2.setMap(map1); //taipei
+          flightPath9.setMap(map1); //taipei-singapore
+        }
+
+        if (destination == 8) {
+          //hanoi
+          flightPath4.setMap(map1); //brunei
+          flightPath14.setMap(map1); //brunei-hanoi
+          flightPath5.setMap(map1); //jakarta
+          flightPath16.setMap(map1); //jakarta-hanoi
+          flightPath3.setMap(map1); //singapore
+          flightPath11.setMap(map1); //singapore-brunei
+          flightPath13.setMap(map1); //brunei-jakarta
+          flightPath2.setMap(map1); //taipei
+          flightPath9.setMap(map1); //taipei-singapore
+        }
+      }
+
+      function show() {
+        var x = document.getElementById("map");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+        var map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 3,
+          center: { lat: 3.139003, lng: 101.686855 },
+          mapTypeId: "terrain"
+        });
+
+        var flightPlanCoordinatesKL_Beijing = [
+          { lat: 3.139003, lng: 101.686855 },
+          { lat: 39.90419989999999, lng: 116.4073963 }
+        ];
+        var flightPath1 = new google.maps.Polyline({
+          path: flightPlanCoordinatesKL_Beijing,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesKL_Taipei = [
+          { lat: 3.139003, lng: 101.686855 },
+          { lat: 25.0329694, lng: 121.5654177 }
+        ];
+        var flightPath2 = new google.maps.Polyline({
+          path: flightPlanCoordinatesKL_Taipei,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesKL_Singapore = [
+          { lat: 3.139003, lng: 101.686855 },
+          { lat: 1.352083, lng: 103.819836 }
+        ];
+        var flightPath3 = new google.maps.Polyline({
+          path: flightPlanCoordinatesKL_Singapore,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesKL_Brunei = [
+          { lat: 3.139003, lng: 101.686855 },
+          { lat: 4.535277, lng: 114.727669 }
+        ];
+        var flightPath4 = new google.maps.Polyline({
+          path: flightPlanCoordinatesKL_Brunei,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesKL_Jakarta = [
+          { lat: 3.139003, lng: 101.686855 },
+          { lat: -6.2087634, lng: 106.845599 }
+        ];
+        var flightPath5 = new google.maps.Polyline({
+          path: flightPlanCoordinatesKL_Jakarta,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesBeijing_Tokyo = [
+          { lat: 39.90419989999999, lng: 116.4073963 },
+          { lat: 35.6761919, lng: 139.6503106 }
+        ];
+        var flightPath6 = new google.maps.Polyline({
+          path: flightPlanCoordinatesBeijing_Tokyo,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesTaipei_Beijing = [
+          { lat: 25.0329694, lng: 121.5654177 },
+          { lat: 39.90419989999999, lng: 116.4073963 }
+        ];
+        var flightPath7 = new google.maps.Polyline({
+          path: flightPlanCoordinatesTaipei_Beijing,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesTaipei_Tokyo = [
+          { lat: 25.0329694, lng: 121.5654177 },
+          { lat: 35.6761919, lng: 139.6503106 }
+        ];
+        var flightPath8 = new google.maps.Polyline({
+          path: flightPlanCoordinatesTaipei_Tokyo,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesTaipei_Singapore = [
+          { lat: 25.0329694, lng: 121.5654177 },
+          { lat: 1.352083, lng: 103.819836 }
+        ];
+        var flightPath9 = new google.maps.Polyline({
+          path: flightPlanCoordinatesTaipei_Singapore,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesSingapore_Melbourne = [
+          { lat: 1.352083, lng: 103.819836 },
+          { lat: -37.8136276, lng: 144.9630576 }
+        ];
+        var flightPath10 = new google.maps.Polyline({
+          path: flightPlanCoordinatesSingapore_Melbourne,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesSingapore_Brunei = [
+          { lat: 1.352083, lng: 103.819836 },
+          { lat: 4.535277, lng: 114.727669 }
+        ];
+        var flightPath11 = new google.maps.Polyline({
+          path: flightPlanCoordinatesSingapore_Brunei,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesMelbourne_Taipei = [
+          { lat: -37.8136276, lng: 144.9630576 },
+          { lat: 25.0329694, lng: 121.5654177 }
+        ];
+        var flightPath12 = new google.maps.Polyline({
+          path: flightPlanCoordinatesMelbourne_Taipei,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesBrunei_Jakarta = [
+          { lat: 4.535277, lng: 114.727669 },
+          { lat: -6.2087634, lng: 106.845599 }
+        ];
+        var flightPath13 = new google.maps.Polyline({
+          path: flightPlanCoordinatesBrunei_Jakarta,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesBrunei_Hanoi = [
+          { lat: 4.535277, lng: 114.727669 },
+          { lat: 21.0277644, lng: 105.8341598 }
+        ];
+        var flightPath14 = new google.maps.Polyline({
+          path: flightPlanCoordinatesBrunei_Hanoi,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesBrunei_Melbourne = [
+          { lat: 4.535277, lng: 114.727669 },
+          { lat: -37.8136276, lng: 144.9630576 }
+        ];
+        var flightPath15 = new google.maps.Polyline({
+          path: flightPlanCoordinatesBrunei_Melbourne,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var flightPlanCoordinatesJakarta_Hanoi = [
+          { lat: -6.2087634, lng: 106.845599 },
+          { lat: 21.0277644, lng: 105.8341598 }
+        ];
+        var flightPath16 = new google.maps.Polyline({
+          path: flightPlanCoordinatesJakarta_Hanoi,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        flightPath1.setMap(map); //kl-beijing
+        flightPath2.setMap(map); //taipei
+        flightPath3.setMap(map); //singapore
+        flightPath4.setMap(map); //brunei
+        flightPath5.setMap(map); //jakarta
+        flightPath6.setMap(map); //beijing-tokyo
+        flightPath7.setMap(map); //taipei-beijing
+        flightPath8.setMap(map); //taipei-tokyo
+        flightPath9.setMap(map); //taipei-singapore
+        flightPath10.setMap(map); //singapore-melbourne
+        flightPath11.setMap(map); //singapore-brunei
+        flightPath12.setMap(map); //melbourne-taipei
+        flightPath13.setMap(map); //brunei-jakarta
+        flightPath14.setMap(map); //brunei-hanoi
+        flightPath15.setMap(map); //brunei-melbourne
+        flightPath16.setMap(map); //jakarta-hanoi
+      }
+    </script>
+    <script
+      async
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9Rifnkv2mDejacMsA-w9tT0L8LqXJ62I&callback=show"
+    ></script>
+  </body>
+</html>
